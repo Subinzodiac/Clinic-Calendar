@@ -6,7 +6,7 @@ export default function Login() {
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email === "staff@clinic.com" && password === "123456") {
+    if (email === import.meta.env.VITE_CLINIC_USER  && password === import.meta.env.VITE_CLINIC_PASS ) {
       localStorage.setItem("isLoggedIn", "true");
       navigate("/calendar");
     } else {
