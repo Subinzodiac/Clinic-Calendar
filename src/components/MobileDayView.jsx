@@ -1,24 +1,32 @@
 import React from "react";
-import InfiniteCalendar from "react-infinite-calendar";
-import "react-infinite-calendar/styles.css";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/style.css";
 
 export default function MobileDayView({ date, onSelect }) {
+  const handleSelect = d => {
+    if (d instanceof Date && !isNaN(d)) {
+      onSelect(d);
+    }
+  };
+
   return (
     <div className="mobile-day-view">
       <input
         type="date"
-        value={date.toISOString().slice(0, 10)}
-        onChange={e => onSelect(new Date(e.target.value))}
+        value={date instanceof Date ? date.toISOString().slice(0, 10) : ""}
+        onChange={e => handleSelect(new Date(e.target.value))}
         className="mobile-date-picker"
       />
-      <InfiniteCalendar
-        selected={date}
-        onSelect={onSelect}
-        width="100%"
-        height={window.innerHeight - 100}
-        displayOptions={{ showHeader: false }}
-        locale={{ todayLabel: 'Today' }}
-      />
+      <div style={{ height: "calc(100vh - 80px)", overflowY: "auto" }}>
+        <DayPicker
+          mode="single"
+          selected={date instanceof Date ? date : undefined}
+          onSelect={handleSelect}
+          numberOfMonths={1}
+          fixedWeeks
+          styles={{ root: { width: "100%" } }}
+        />
+      </div>
     </div>
   );
 }
