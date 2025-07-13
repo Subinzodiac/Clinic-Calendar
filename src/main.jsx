@@ -15,6 +15,7 @@ import "./index.css";
 import AboutPage from "./routes/about.jsx";
 import ContactPage from "./routes/contact.jsx";
 
+
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
 }
